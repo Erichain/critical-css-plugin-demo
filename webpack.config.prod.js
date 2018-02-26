@@ -54,7 +54,7 @@ module.exports = {
       },
     }),
     new ExtractTextPlugin({
-      filename: 'css/style.[hash].css',
+      filename: 'css/style.css',
       allChunks: true
     }),
     new HtmlCriticalPlugin({
