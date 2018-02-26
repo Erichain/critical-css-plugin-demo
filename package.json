@@ -1,0 +1,22 @@
+{
+  "name": "critical-css-plugin-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.dll.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Erichain/critical-css-plugin-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Erichain/critical-css-plugin-demo/issues"
+  },
+  "homepage": "https://github.com/Erichain/critical-css-plugin-demo#readme"
+}
