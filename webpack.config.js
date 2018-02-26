@@ -18,7 +18,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     host: process.env.LOCAL_ADDRESS,
-    port: 3333,
+    port: 8888,
     inline: true,
     proxy: {
       '/agent': {
@@ -50,7 +50,7 @@ module.exports = {
       chunks: ['common', 'app'],
     }),
     new OpenBrowserPlugin({
-      url: `http://${process.env.LOCAL_ADDRESS}:3333`,
+      url: `http://${process.env.LOCAL_ADDRESS}:8888`,
     }),
     new webpack.DefinePlugin({
       'process.env': {
