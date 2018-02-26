@@ -1,7 +1,5 @@
-const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
-const UglifyJS = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -50,37 +48,7 @@ module.exports = {
           },
           hotReload: true,
         },
-      }, {
-        test: /\.(jpe?g|png|gif|svg)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 8192,
-          name: 'images/[name].[hash].[ext]',
-        },
       },
     ],
   },
-
-  plugins: [
-    new UglifyJS({
-      uglifyOptions: {
-        mangle: true,
-        compress: {
-          warnings: false,
-          pure_getters: true,
-        },
-      },
-    }),
-    new ExtractTextPlugin({
-      filename: 'css/style.[hash].css',
-      allChunks: true
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(
-          process.env.NODE_ENV === 'production' ? 'production' : 'development'
-        ),
-      },
-    }),
-  ],
 };

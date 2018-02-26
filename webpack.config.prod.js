@@ -4,6 +4,8 @@ const path = require('path');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const HtmlCriticalPlugin = require('html-critical-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJS = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const manifest = require('./dist-dll/vendor-manifest.json');
 const publicConfig = require('./webpack.config.public');
 
@@ -13,7 +15,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[hash].js',
-    publicPath: '//mss.sankuai.com/v1/mss_c4375b35f5cb4e678b5b55a48c40cf9d/waimai-mfe-crm-client-h5/',
   },
 
   resolve: publicConfig.resolve,
@@ -21,6 +22,11 @@ module.exports = {
   module: publicConfig.module,
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       inject: 'body',
@@ -38,7 +44,19 @@ module.exports = {
       assets: ['js/vendor.dll.js'],
       append: false,
     }),
-  ].concat(publicConfig.plugins).concat([
+    new UglifyJS({
+      uglifyOptions: {
+        mangle: true,
+        compress: {
+          warnings: false,
+          pure_getters: true,
+        },
+      },
+    }),
+    new ExtractTextPlugin({
+      filename: 'css/style.[hash].css',
+      allChunks: true
+    }),
     new HtmlCriticalPlugin({
       base: path.resolve(__dirname, 'dist'),
       src: 'index.html',
@@ -50,6 +68,6 @@ module.exports = {
         blockJSRequests: false,
       },
     }),
-  ]),
+  ],
 };
 
