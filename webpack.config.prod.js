@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
-const HtmlCriticalPlugin = require('html-critical-webpack-plugin');
+const CriticalCSSPlugin = require('critical-css-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJS = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -57,7 +57,7 @@ module.exports = {
       filename: 'css/style.css',
       allChunks: true
     }),
-    new HtmlCriticalPlugin({
+    new CriticalCSSPlugin({
       base: path.resolve(__dirname, 'dist'),
       src: 'index.html',
       dest: 'index.html',
